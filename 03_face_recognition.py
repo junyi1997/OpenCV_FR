@@ -261,7 +261,7 @@ while True:
             else : cv2.putText(img, str(names[id]), (x+5,y-5), font, 1, color, 2)
             #cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, color, 1)  
 
-    cv2.moveWindow('camera', 512,384)
+    cv2.moveWindow('camera', 192,144)
     cv2.imshow('camera',img) 
     
 
