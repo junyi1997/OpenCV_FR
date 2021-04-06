@@ -2,6 +2,12 @@ import cv2
 import os
 import numpy as np
 from PIL import Image
+import BotSpeak
+#threading引用必要套件
+from threading import Thread
+import threading
+def BOT(speaker):
+    BotSpeak.speak(speaker)
 
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video width
@@ -30,8 +36,9 @@ for i in range(len(bbb)):
 
 f.write(ccc)
 f.close() 
+aaaa="新增資料：學號 = {:} / 編號 = {:}".format(face_id,len(bbb)-1)
 print("新增資料：學號 = {:} / 編號 = {:}".format(face_id,len(bbb)-1))
-
+Thread(target=BOT,args =(aaaa,)).start()
 
 print("\n [INFO] Initializing face capture. Look the camera and wait ...")
 # Initialize individual sampling face count
@@ -109,3 +116,4 @@ recognizer.write('trainer/trainer.yml') # recognizer.save() worked on Mac, but n
 
 # Print the numer of faces trained and end program
 print("\n [INFO] {0} faces trained. Exiting Program".format(len(np.unique(ids))))
+Thread(target=BOT,args =('特徵提取完成',)).start()

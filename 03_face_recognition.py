@@ -18,7 +18,12 @@ from tensorflow.keras.models import load_model
 
 REAL_THRESHOLD = 0.8 #will return fake if pred of real doesnt exceed threshold
 std_correct_time=0
-
+import BotSpeak
+#threading引用必要套件
+from threading import Thread
+import threading
+def BOT(speaker):
+    BotSpeak.speak(speaker)
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('trainer/trainer.yml')
@@ -109,6 +114,7 @@ def getLiveLabelfromImgandCoords(img, startX, startY, endX, endY, cw, ch):
 import os
 import time
 def UnKnow_process(frame):
+  Thread(target=BOT,args =('已拍照記錄',)).start()
   Y=time.strftime("%Y", time.localtime()) 
   M=time.strftime("%m", time.localtime()) 
   D=time.strftime("%d", time.localtime()) 
