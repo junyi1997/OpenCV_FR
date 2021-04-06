@@ -58,7 +58,7 @@ label = ""
 pred = ""
 
 observed_resual=''
-correct_count=50
+correct_count=5
 def getLiveLabelfromImgandCoords(img, startX, startY, endX, endY, cw, ch):
     global model,le,net,label,pred
     lsy = startY
