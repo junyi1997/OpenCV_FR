@@ -133,6 +133,20 @@ def UnKnow_process(frame):
 
   savepath="./UnKnow/{:}-{:}-{:}/{:}h{:}m{:}s.jpg".format(Y,M,D,H,Min,Sec)
   cv2.imwrite(savepath, frame)
+  #上傳圖片
+  import pyimgur
+
+  CLIENT_ID = "23357c7249732cd"
+  #PATH = "15h11m51s.jpg" #A Filepath to an image on your computer"
+
+  im = pyimgur.Imgur(CLIENT_ID)
+  uploaded_image = im.upload_image(savepath, title="Uploaded with PyImgur")
+  #print(uploaded_image.title)
+  #print(uploaded_image.link)
+  #print(uploaded_image.type)
+  print("上傳完成")
+  a="https://maker.ifttt.com/trigger/openCV_FR/with/key/dqTARGjv_Q1zeS_-LY1TyV?value1={:}".format(uploaded_image.link)
+  r = requests.get(a)
 
 # 引入 requests 模組
 import requests
@@ -201,6 +215,7 @@ while True:
     range_max = 200
     
     for(x,y,w,h) in faces:
+        
         x1,y1,x2,y2=x,y,x+w,y+h
         #if w>range_max and h>range_max:print("請再遠離一點......")
         #if w<range_min and h<range_min:print("請再靠近一點......")
@@ -239,34 +254,35 @@ while True:
                 color=(0,0,255)#blue  
             if abs(x1-x2)>100 and abs(y1-y2)>100 and observed_resual!="real":
                 if std_correct_time>=correct_count:
-                    #if observed_resual!="real":SendURL("real")
+                    if observed_resual!="real":SendURL("real")
                     observed_resual="real"
                     color=(128,255,0)#green
                 
                 elif std_correct_time>0 and std_correct_time<correct_count:
-                    #if observed_resual!="wait":SendURL("wait")
+                    if observed_resual!="wait":SendURL("wait")
                     observed_resual="wait"
                     color=(0,255,255)#yellow
                 
                 elif std_correct_time==0 and id!="unknown":
-                    #if observed_resual!="false":SendURL("false")
+                    if observed_resual!="false":SendURL("false")
                     observed_resual="false"
                     color=(255,0,0)#red
 
  
  
-            elif abs(x1-x2)<100 and abs(y1-y2)<100:
+            elif abs(x1-x2)<100:
                 #清除辨識結果
                 observed_resual=""
                 std_correct_time=0
-                #SendURL("stay")
+                SendURL("stay")
 
 
             cv2.rectangle(img, (x,y), (x+w,y+h), color, 2)
+            
             if id == "unknown" : cv2.putText(img, str(id), (x+5,y-5), font, 1, color, 2)
             else : cv2.putText(img, str(names[id]), (x+5,y-5), font, 1, color, 2)
-            #cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, color, 1)  
-
+            cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, color, 1)  
+        print("observed_resual = {:} = {:} = {:}".format(observed_resual,abs(x1-x2),abs(y1-y2)))
     cv2.moveWindow('camera', 192,144)
     cv2.imshow('camera',img) 
     
