@@ -150,7 +150,7 @@ def UnKnow_process(frame):
 
 # 引入 requests 模組
 import requests
-IP="192.168.100.11"
+IP="192.168.0.100"
 def SendURL(sendword):
   #print(sendword)
   if sendword == "real":
@@ -213,7 +213,7 @@ while True:
        )
     range_min = 150
     range_max = 200
-    
+    SendURL("wait")
     for(x,y,w,h) in faces:
         
         x1,y1,x2,y2=x,y,x+w,y+h
@@ -248,7 +248,7 @@ while True:
             #print("std_correct_time = {:}".format(std_correct_time))
             if id=="unknown":
                 if observed_resual!="unknown":
-                    #SendURL("UnKnow") 
+                    SendURL("UnKnow") 
                     UnKnow_process(img)
                 observed_resual="unknown"
                 color=(0,0,255)#blue  
