@@ -282,7 +282,7 @@ while True:
             if id == "unknown" : cv2.putText(img, str(id), (x+5,y-5), font, 1, color, 2)
             else : cv2.putText(img, str(names[id]), (x+5,y-5), font, 1, color, 2)
             cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, color, 1)  
-        print("observed_resual = {:} = {:} = {:}".format(observed_resual,abs(x1-x2),abs(y1-y2)))
+        #print("observed_resual = {:} = {:} = {:}".format(observed_resual,abs(x1-x2),abs(y1-y2)))
     cv2.moveWindow('camera', 192,144)
     cv2.imshow('camera',img) 
     
