@@ -40,8 +40,8 @@ names = []
 
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)
-cam.set(3, 640) # set video widht
-cam.set(4, 480) # set video height
+cam.set(3, 250) # set video widht
+cam.set(4, 250) # set video height
 
 # Define min window size to be recognized as a face
 minW = 0.1*cam.get(3)
@@ -247,24 +247,24 @@ while True:
                 std_correct_time=0
             #print("std_correct_time = {:}".format(std_correct_time))
             if id=="unknown":
-                if observed_resual!="unknown":
+                #if observed_resual!="unknown":
                     #SendURL("UnKnow") 
-                    UnKnow_process(img)
+                    #UnKnow_process(img)
                 observed_resual="unknown"
                 color=(0,0,255)#blue  
             if abs(x1-x2)>100 and abs(y1-y2)>100 and observed_resual!="real":
                 if std_correct_time>=correct_count:
-                    if observed_resual!="real":SendURL("real")
+                    #if observed_resual!="real":SendURL("real")
                     observed_resual="real"
                     color=(128,255,0)#green
                 
                 elif std_correct_time>0 and std_correct_time<correct_count:
-                    if observed_resual!="wait":SendURL("wait")
+                    #if observed_resual!="wait":SendURL("wait")
                     observed_resual="wait"
                     color=(0,255,255)#yellow
                 
                 elif std_correct_time==0 and id!="unknown":
-                    if observed_resual!="false":SendURL("false")
+                    #if observed_resual!="false":SendURL("false")
                     observed_resual="false"
                     color=(255,0,0)#red
 
@@ -274,7 +274,7 @@ while True:
                 #清除辨識結果
                 observed_resual=""
                 std_correct_time=0
-                SendURL("stay")
+                #SendURL("stay")
 
 
             cv2.rectangle(img, (x,y), (x+w,y+h), color, 2)
