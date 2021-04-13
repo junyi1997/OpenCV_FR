@@ -150,7 +150,7 @@ def UnKnow_process(frame):
 
 # 引入 requests 模組
 import requests
-IP="192.168.100.11"
+IP="192.168.0.100"
 def SendURL(sendword):
   #print(sendword)
   if sendword == "real":
@@ -213,7 +213,7 @@ while True:
        )
     range_min = 150
     range_max = 200
-    
+    SendURL("wait")
     for(x,y,w,h) in faces:
         
         x1,y1,x2,y2=x,y,x+w,y+h
@@ -247,9 +247,15 @@ while True:
                 std_correct_time=0
             #print("std_correct_time = {:}".format(std_correct_time))
             if id=="unknown":
+<<<<<<< HEAD
                 #if observed_resual!="unknown":
                     #SendURL("UnKnow") 
                     #UnKnow_process(img)
+=======
+                if observed_resual!="unknown":
+                    SendURL("UnKnow") 
+                    UnKnow_process(img)
+>>>>>>> be3e236b13ac780334cb58851d0ed10863966e67
                 observed_resual="unknown"
                 color=(0,0,255)#blue  
             if abs(x1-x2)>100 and abs(y1-y2)>100 and observed_resual!="real":
@@ -282,7 +288,7 @@ while True:
             if id == "unknown" : cv2.putText(img, str(id), (x+5,y-5), font, 1, color, 2)
             else : cv2.putText(img, str(names[id]), (x+5,y-5), font, 1, color, 2)
             cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, color, 1)  
-        print("observed_resual = {:} = {:} = {:}".format(observed_resual,abs(x1-x2),abs(y1-y2)))
+        #print("observed_resual = {:} = {:} = {:}".format(observed_resual,abs(x1-x2),abs(y1-y2)))
     cv2.moveWindow('camera', 192,144)
     cv2.imshow('camera',img) 
     
