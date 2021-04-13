@@ -213,7 +213,7 @@ while True:
        )
     range_min = 150
     range_max = 200
-    SendURL("wait")
+    #SendURL("wait")
     for(x,y,w,h) in faces:
         
         x1,y1,x2,y2=x,y,x+w,y+h
@@ -247,15 +247,10 @@ while True:
                 std_correct_time=0
             #print("std_correct_time = {:}".format(std_correct_time))
             if id=="unknown":
-<<<<<<< HEAD
                 #if observed_resual!="unknown":
                     #SendURL("UnKnow") 
                     #UnKnow_process(img)
-=======
-                if observed_resual!="unknown":
-                    SendURL("UnKnow") 
-                    UnKnow_process(img)
->>>>>>> be3e236b13ac780334cb58851d0ed10863966e67
+
                 observed_resual="unknown"
                 color=(0,0,255)#blue  
             if abs(x1-x2)>100 and abs(y1-y2)>100 and observed_resual!="real":
